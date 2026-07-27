@@ -71,4 +71,8 @@ optimize prohibited access.
 
 ## License / ライセンス
 
-MIT — see `LICENSE`. / MIT ライセンス（`LICENSE` 参照）。
+Apache License 2.0 — see `LICENSE` and `NOTICE`. / Apache License 2.0（`LICENSE`・`NOTICE`
+参照）。Permissive like MIT, with an explicit patent grant and a trademark clause. /
+MIT 同様に緩い許容型で、特許ライセンスの明示と商標条項を含みます。
+
+Copyright 2026 Elderithm, Inc.
