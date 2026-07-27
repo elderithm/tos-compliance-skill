@@ -1,6 +1,6 @@
 ---
 name: marketplace-data-compliance
-description: Assess whether collecting data (scraping, private APIs, third-party reuse) from marketplaces or websites is allowed by their Terms of Service, robots.txt, and official APIs. Use before building any scraper/crawler/data pipeline, or when reviewing the legal/ToS risk of an existing one. Produces a sourced, per-site risk table and compliant alternatives. Not legal advice.
+description: Assess whether collecting data (scraping, private APIs, third-party reuse) from marketplaces or websites is allowed by their Terms of Service, robots.txt, and official APIs. Use before building any scraper/crawler/data pipeline, or when reviewing the legal/ToS risk of an existing one. Produces a sourced, per-site risk table and compliant alternatives. Not legal advice. / サイトからのデータ収集(スクレイピング/非公開API/二次利用)が利用規約・robots.txt・公式APIに適合するかを一次情報で評価し、サイト別リスク表と規約適合的な代替案を出す。スクレイパー実装前や既存パイプラインのリスク点検に使う。法的助言ではない。
 ---
 
 # Marketplace / Website Data-Collection Compliance Check
