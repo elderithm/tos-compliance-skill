@@ -41,24 +41,67 @@ it, the skill:
 
 ## Install / 導入
 
-**Claude Code** — copy into your skills directory / スキルディレクトリへコピー:
+This repo is a **Claude Code plugin** (it bundles the skill and a `/tos-check` command)
+and also works as a plain skill.
+
+このリポジトリは **Claude Code プラグイン**です（スキルと `/tos-check` コマンドを同梱）。
+プラグインを使わず素のスキルとしても使えます。
+
+### A) As a plugin (recommended) / プラグインとして（推奨）
+
+In Claude Code / Claude Code 内で:
+
+```text
+/plugin marketplace add elderithm/tos-compliance-skill
+/plugin install tos-compliance-skill@elderithm
+```
+
+This installs both the **skill** (auto-activates when relevant) and the **`/tos-check`
+command**. / これで**スキル**（関連時に自動起動）と **`/tos-check` コマンド**の両方が入ります。
+
+### B) As a skill only (manual copy) / スキルのみ（手動コピー）
 
 ```bash
 # project-scoped / プロジェクト単位
-cp -r . <your-repo>/.claude/skills/marketplace-data-compliance
+cp -r skills/marketplace-data-compliance <your-repo>/.claude/skills/marketplace-data-compliance
 # or personal / 個人単位
-cp -r . ~/.claude/skills/marketplace-data-compliance
+cp -r skills/marketplace-data-compliance ~/.claude/skills/marketplace-data-compliance
 ```
 
-Then invoke it by describing the task ("check if we can legally scrape sold prices from
-X and Y"), or by name. / タスクを説明するか名前で呼び出します（例：「X と Y から成約価格を
-スクレイピングして良いか調べて」）。
+## Usage / 使い方
+
+**Slash command with placeholders / プレースホルダ付きスラッシュコマンド:**
+
+```text
+/tos-check <sites> access=<method> data=<target> use=<internal|third-party/commercial>
+```
+
+Placeholders / プレースホルダ:
+
+- `<sites>` — target hostnames (incl. API hosts) / 対象ホスト名（APIホスト含む）
+- `access=<method>` — HTML scrape / official API / private API / headless …
+- `data=<target>` — e.g. sold prices, listings / 例: 成約価格・出品一覧
+- `use=<...>` — internal only / third-party display / commercial / 内部のみ・第三者表示・商用
+
+Example / 例:
+
+```text
+/tos-check example.com, api.example.com access=private-api data=sold-prices use=commercial
+```
+
+Arguments are optional — if omitted, the command asks for them. You can also just describe
+the task in natural language and the **skill** will activate on its own.
+引数は任意で、省略すると聞き返します。自然文でタスクを説明すれば**スキル**が自動起動します。
 
 ## Files / ファイル
 
-- `SKILL.md` — the skill itself (methodology, output format, guardrails). / スキル本体
-  （手順・出力フォーマット・ガードレール）。
-- `references/report-template.md` — the report skeleton the skill fills in. / 出力レポートの雛形。
+- `.claude-plugin/plugin.json` — plugin manifest / プラグイン定義。
+- `.claude-plugin/marketplace.json` — marketplace entry so the repo is installable / この
+  リポジトリを marketplace として追加可能にする定義。
+- `commands/tos-check.md` — the `/tos-check` slash command / スラッシュコマンド。
+- `skills/marketplace-data-compliance/SKILL.md` — the skill (methodology, output, guardrails)
+  / スキル本体（手順・出力・ガードレール）。
+- `skills/marketplace-data-compliance/references/report-template.md` — report skeleton / レポート雛形。
 
 ## Guardrails / ガードレール
 

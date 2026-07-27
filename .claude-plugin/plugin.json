@@ -1,0 +1,9 @@
+{
+  "name": "tos-compliance-skill",
+  "version": "0.1.0",
+  "description": "Assess whether scraping / data collection from a site complies with its ToS, robots.txt & official APIs (not legal advice). Bundles the marketplace-data-compliance skill and the /tos-check command.",
+  "author": { "name": "Elderithm, Inc." },
+  "homepage": "https://github.com/elderithm/tos-compliance-skill",
+  "license": "Apache-2.0",
+  "keywords": ["compliance", "scraping", "terms-of-service", "robots-txt", "legal", "data-collection"]
+}

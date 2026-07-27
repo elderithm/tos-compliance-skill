@@ -1,0 +1,11 @@
+{
+  "name": "elderithm",
+  "owner": { "name": "Elderithm, Inc." },
+  "plugins": [
+    {
+      "name": "tos-compliance-skill",
+      "source": "./",
+      "description": "Assess whether scraping / data collection from a site complies with its ToS, robots.txt & official APIs (not legal advice)."
+    }
+  ]
+}
