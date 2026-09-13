@@ -41,13 +41,17 @@ it, the skill:
 
 ## Install / 導入
 
-This repo is a **Claude Code plugin** (it bundles the skill and a `/tos-check` command)
-and also works as a plain skill.
+This repo works with both **Claude Code** and **OpenAI Codex** — the same `SKILL.md`
+format is shared by both. In Claude Code it is also a **plugin** (skill + `/tos-check`
+command); in Codex it installs as a skill plus a matching `/tos-check` custom prompt.
 
-このリポジトリは **Claude Code プラグイン**です（スキルと `/tos-check` コマンドを同梱）。
-プラグインを使わず素のスキルとしても使えます。
+このリポジトリは **Claude Code** と **OpenAI Codex** の両方で使えます（`SKILL.md` 形式は
+両者共通）。Claude Code では**プラグイン**（スキル + `/tos-check` コマンド）として、
+Codex ではスキル + `/tos-check` カスタムプロンプトとして導入できます。
 
-### A) As a plugin (recommended) / プラグインとして（推奨）
+### Claude Code
+
+#### A) As a plugin (recommended) / プラグインとして（推奨）
 
 In Claude Code / Claude Code 内で:
 
@@ -59,7 +63,7 @@ In Claude Code / Claude Code 内で:
 This installs both the **skill** (auto-activates when relevant) and the **`/tos-check`
 command**. / これで**スキル**（関連時に自動起動）と **`/tos-check` コマンド**の両方が入ります。
 
-### B) As a skill only (manual copy) / スキルのみ（手動コピー）
+#### B) As a skill only (manual copy) / スキルのみ（手動コピー）
 
 ```bash
 # project-scoped / プロジェクト単位
@@ -67,6 +71,34 @@ cp -r skills/marketplace-data-compliance <your-repo>/.claude/skills/marketplace-
 # or personal / 個人単位
 cp -r skills/marketplace-data-compliance ~/.claude/skills/marketplace-data-compliance
 ```
+
+### OpenAI Codex
+
+Codex discovers skills in `$CODEX_HOME/skills/` (default `~/.codex/skills/`) and custom
+prompts in `~/.codex/prompts/`. Copy the skill (and, for the `/tos-check` slash command,
+the prompt):
+
+Codex はスキルを `$CODEX_HOME/skills/`（既定 `~/.codex/skills/`）、カスタムプロンプトを
+`~/.codex/prompts/` から読み込みます。スキル（と `/tos-check` を使う場合はプロンプト）を
+コピーしてください：
+
+```bash
+# skill / スキル本体
+cp -r skills/marketplace-data-compliance ~/.codex/skills/marketplace-data-compliance
+# optional: /tos-check custom prompt / 任意: /tos-check カスタムプロンプト
+mkdir -p ~/.codex/prompts && cp prompts/tos-check.md ~/.codex/prompts/tos-check.md
+```
+
+Or install straight from GitHub with Codex's own skill-installer / もしくは Codex の
+skill-installer で GitHub から直接導入:
+
+```text
+Install the marketplace-data-compliance skill from
+elderithm/tos-compliance-skill (path: skills/marketplace-data-compliance)
+```
+
+The skill **auto-activates** when relevant; `/tos-check` runs it explicitly with
+arguments. / スキルは関連時に**自動起動**します。`/tos-check` は引数付きで明示的に実行します。
 
 ## Usage / 使い方
 
@@ -90,15 +122,18 @@ Example / 例:
 ```
 
 Arguments are optional — if omitted, the command asks for them. You can also just describe
-the task in natural language and the **skill** will activate on its own.
+the task in natural language and the **skill** will activate on its own. Works the same in
+Claude Code (`/tos-check`) and Codex (`/tos-check`).
 引数は任意で、省略すると聞き返します。自然文でタスクを説明すれば**スキル**が自動起動します。
+Claude Code・Codex どちらでも `/tos-check` で同じように動きます。
 
 ## Files / ファイル
 
 - `.claude-plugin/plugin.json` — plugin manifest / プラグイン定義。
 - `.claude-plugin/marketplace.json` — marketplace entry so the repo is installable / この
   リポジトリを marketplace として追加可能にする定義。
-- `commands/tos-check.md` — the `/tos-check` slash command / スラッシュコマンド。
+- `commands/tos-check.md` — the `/tos-check` slash command for Claude Code / Claude Code 用スラッシュコマンド。
+- `prompts/tos-check.md` — the `/tos-check` custom prompt for Codex / Codex 用カスタムプロンプト。
 - `skills/marketplace-data-compliance/SKILL.md` — the skill (methodology, output, guardrails)
   / スキル本体（手順・出力・ガードレール）。
 - `skills/marketplace-data-compliance/references/report-template.md` — report skeleton / レポート雛形。
